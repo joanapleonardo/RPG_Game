@@ -1,10 +1,5 @@
 package Entidades;
 
-import Itens.Arma;
-import Itens.PocaoHP;
-
-import java.util.ArrayList;
-
 public class Arqueiro extends Heroi {
     public Arqueiro(String nome, int vida, int forca, int nivel, int ouro) {
         super(nome, vida, forca, nivel, ouro);
@@ -16,8 +11,6 @@ public class Arqueiro extends Heroi {
      */
     @Override
     public void atacar(NPC npc) {
-
-
         while (this.getVida()>=0 && npc.getVida()>=0) {
 
             // O herói ataca
@@ -25,7 +18,7 @@ public class Arqueiro extends Heroi {
             npc.setVida(npc.getVida() - danoHeroi);
             System.out.println(npc.getVida());
             //npc.subtrairVida(danoHeroi);
-            // Verifica se o herói ainda está vivo
+
             // Verifica se o inimigo ainda está vivo
             if (npc.getVida() <= 0) {
                 System.out.println("O herói venceu!");

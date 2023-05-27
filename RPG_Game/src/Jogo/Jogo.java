@@ -11,6 +11,29 @@ import java.util.Scanner;
 
 public class Jogo {
 
+    /******************* Instanciar os personagens *************************/
+    public static Cavaleiro criarCavaleiro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nQual é o nome do Cavaleiro?");
+        String nome = scanner.nextLine();
+        return new Cavaleiro(nome, 0, 0, 0, 0);
+    }
+
+    public static Feiticeiro criarFeiticeiro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o nome do Feiticeiro:");
+        String nome = scanner.nextLine();
+        return new Feiticeiro(nome, 0, 0, 0, 0);
+    }
+
+
+    public static Arqueiro criarArqueiro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o nome do Arqueiro:");
+        String nome = scanner.nextLine();
+        return new Arqueiro(nome, 0, 0, 0, 0);
+    }
+
     public static void labirinto() {
 
         Scanner scanner = new Scanner(System.in);
@@ -21,10 +44,18 @@ public class Jogo {
         boolean opcaoValida = false;
 
         while (!opcaoValida) {
-            System.out.println("Selecione o tipo de herói: ");
+            System.out.println("\nBem-vindo ao Reino de Eldoria!");
+            System.out.println("\nAqui, a magia fluía livremente e criaturas míticas vagueavam pela terra. \nO reino estava sob a proteção de um rei sábio e justo, que governava com benevolência e sabedoria. \nNo entanto, o equilíbrio do reino foi ameaçado quando um antigo mal despertou das sombras.");
+            System.out.println("\nUm artefato místico conhecido como a Pedra das Trevas, que continha um poder incrível e perigoso, foi roubado de seu local de descanso!");
+            System.out.println("\nA Pedra das Trevas possui a capacidade de corromper qualquer ser que a tocasse, transformando-o num agente do caos e da destruição. \nAgora, nas mãos erradas, essa relíquia pode causar o fim de Eldoria!!");
+            System.out.println("\nO Rei, preocupado com o destino de seu reino, convocou os maiores heróis e aventureiros de toda a terra para uma missão épica: \nrecuperar a Pedra das Trevas e salvar Eldoria! \nEntre os convocados, estão um cavaleiro valente, um arqueiro habilidoso e um feiticeiro poderoso.");
+            System.out.println("\nJuntos partirão numa jornada perigosa e cheia de desafios. Juntos, viajarão por terras desconhecidas, enfrentando monstros aterrorizantes. \nAo longo de sua jornada, eles encontrarão aliados improváveis!");
+
+            System.out.println("\nEscolhe o teu personagem: ");
             System.out.println("1. Cavaleiro");
             System.out.println("2. Feiticeiro");
             System.out.println("3. Arqueiro");
+            System.out.print("->");
 
             try {
                 String input = scanner.nextLine();
@@ -44,10 +75,10 @@ public class Jogo {
                         opcaoValida = true;
                         break;
                     default:
-                        System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+                        System.out.println("Opção inválida. Por favor, escolhe uma opção válida.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Opção inválida. Por favor, insira um número de 1 a 3.");
+                System.out.println("Opção inválida. Por favor, insere um número de 1 a 3.");
             }
         }
 
@@ -56,9 +87,10 @@ public class Jogo {
 
         while (!opcaoValida) {
             try {
-                System.out.println("Selecione a dificuldade: ");
+                System.out.println("\nEscolhe o nível de dificuldade: ");
                 System.out.println("1. Fácil");
                 System.out.println("2. Difícil");
+                System.out.print("->");
 
                 String input = scanner.nextLine();
                 dificuldade = Integer.parseInt(input);
@@ -81,7 +113,7 @@ public class Jogo {
         do {
             if (dificuldade == 1) {
                 pontosCriacao = 300;
-                System.out.println("Tens tem 300 pontos de criação da personagem.");
+                System.out.println("\nTens 300 pontos de criação da personagem.");
             } else if (dificuldade == 2) {
                 pontosCriacao = 220;
                 System.out.println("Tens tem 220 pontos de criação da personagem.");
@@ -93,8 +125,8 @@ public class Jogo {
             System.out.println("Distribui os pontos de criação entre vida e força.");
             System.out.println("Nota: cada ponto de vida vale um ponto de criação e cada ponto de força vale 5 pontos de criação.");
 
-            System.out.println("Pontos de vida disponíveis: " + pontosCriacao);
-            System.out.println("Digite a quantidade de pontos de vida: ");
+            System.out.println("\nPontos de vida disponíveis: " + pontosCriacao);
+            System.out.println("Quantos pontos pretendes atribuir a vida? ");
             pontosVida = scanner.nextInt();
 
             if (pontosVida > pontosCriacao) {
@@ -103,7 +135,7 @@ public class Jogo {
             }
 
             System.out.println("Pontos de força disponíveis: " + ((pontosCriacao - pontosVida) / 5));
-            System.out.println("Qual a quantidade de pontos de força? ");
+            System.out.println("Quantos pontos pretendes atribuir a força? ");
 
             pontosForca = scanner.nextInt();
 
@@ -131,25 +163,25 @@ public class Jogo {
         heroi.setOuro(ouro);
 
         // Iniciar o labirinto
-        System.out.println("A iniciar o labirinto com o herói " + heroi.getClass().getSimpleName() + " " + heroi.getNome() +
-                " na dificuldade " + (dificuldade == 1 ? "Fácil" : "Difícil") + ". Detalhes do herói: " +
+        System.out.println("\nO " + heroi.getClass().getSimpleName() + " " + heroi.getNome() +
+                " vai iniciar esta jornada épica na dificuldade " + (dificuldade == 1 ? "Fácil" : "Difícil") + ". \nDetalhes do herói: " +
                 "Força: " + heroi.getForca() + ", Vida: " + heroi.getVida() + ", Ouro: " + heroi.getOuro() + ".");
 
 
         // instanciar inimigos
-        NPC npc1 = new NPC("Lorde das Trevas", 100, 10);
+        NPC LordeTrevas = new NPC("Lorde das Trevas", 100, 10);
         //npc1.mostrarDetalhes();
 
-        NPC npc2 = new NPC("Dragão Ancião", 80, 8);
+        NPC Dragao = new NPC("Dragão Ancião", 80, 8);
         //npc2.mostrarDetalhes();
 
-        NPC npc3 = new NPC("Necromante", 120, 12);
+        NPC Necromante = new NPC("Necromante", 120, 12);
         //npc3.mostrarDetalhes();
 
-        NPC npc4 = new NPC("Bruxa Malévola ", 150, 15);
+        NPC Bruxa = new NPC("Bruxa Malévola ", 150, 15);
         //npc4.mostrarDetalhes();
 
-        NPC npc5 = new NPC("Demônio das Sombra", 90, 9);
+        NPC Demonio = new NPC("Demônio das Sombra", 90, 9);
         //npc5.mostrarDetalhes();
         // Resto da lógica do labirinto...
 
@@ -160,13 +192,11 @@ public class Jogo {
         tiposHeroi.add(TiposHeroi.FEITICEIRO);
 
 
-        PocaoHP pocao1 = new PocaoHP("Poção de Cura de Veneno", 300, tiposHeroi, 60);
+        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 300, tiposHeroi, 60);
 
-        PocaoHP pocao2 = new PocaoHP("Poção de Cura de Maldição", 20, tiposHeroi, 85);
+        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 40, tiposHeroi, 90);
 
-        PocaoHP pocao3 = new PocaoHP("Poção de Cura Completa", 40, tiposHeroi, 90);
-
-        PocaoHP pocao4 = new PocaoHP("Poção de Cura Menor", 10, tiposHeroi, 25);
+        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 10, tiposHeroi, 25);
 
 
         // Todos os tipo de heroi
@@ -191,60 +221,53 @@ public class Jogo {
         heroiFeiticeiro.add(TiposHeroi.FEITICEIRO);
         // Faça o que precisa com a combinacao7
 
-        Arma arma1 = new Arma("Lança", 50, todosTiposHeroi, 20);
-        Arma arma2 = new Arma("Adaga", 50, todosTiposHeroi, 20);
-        Arma arma3 = new Arma("Cetro Arcano", 50, todosTiposHeroi, 20);
-        Arma arma4 = new Arma("Varinha Mágica", 50, heroiFeiticeiro, 20);
-        Arma arma5 = new Arma("Livro de feitiço", 50, heroiFeiticeiro, 20);
-        Arma arma6 = new Arma("Espada Longa", 50, heroiCavaleiro, 20);
-        Arma arma7 = new Arma("Arco Longo", 50, heroiArqueiro, 20);
-        Arma arma8 = new Arma("Besta", 50, heroiArqueiro, 20);
-        Arma arma9 = new Arma("Machado de batalha", 50, heroiCavaleiro, 20);
+        Arma lanca = new Arma("Lança", 50, todosTiposHeroi, 20);
+        Arma adaga = new Arma("Adaga", 50, todosTiposHeroi, 20);
+        Arma cetroArcano = new Arma("Cetro Arcano", 50, todosTiposHeroi, 20);
+        Arma varinhaMagica = new Arma("Varinha Mágica", 50, heroiFeiticeiro, 20);
+        Arma livroDeFeitiço = new Arma("Livro de feitiço", 50, heroiFeiticeiro, 20);
+        Arma espadaLonga = new Arma("Espada Longa", 50, heroiCavaleiro, 20);
+        Arma arcoLongo = new Arma("Arco Longo", 50, heroiArqueiro, 20);
+        Arma besta = new Arma("Besta", 50, heroiArqueiro, 20);
+        Arma machadoDeBatalha = new Arma("Machado de batalha", 50, heroiCavaleiro, 20);
 
 
         //instanciar vendedor com inventário
         Vendedor vendedor1 = new Vendedor();
 
-        vendedor1.adicionarItem(arma1);
-        vendedor1.adicionarItem(arma2);
-        vendedor1.adicionarItem(arma3);
-        vendedor1.adicionarItem(arma4);
-        vendedor1.adicionarItem(pocao1);
-        vendedor1.adicionarItem(pocao2);
-        vendedor1.adicionarItem(pocao3);
-        vendedor1.adicionarItem(pocao4);
+        vendedor1.adicionarItem(lanca);
+        vendedor1.adicionarItem(adaga);
+        vendedor1.adicionarItem(cetroArcano);
+        vendedor1.adicionarItem(varinhaMagica);
+        vendedor1.adicionarItem(pocaoCompleta);
+        vendedor1.adicionarItem(pocaoSOS);
+        vendedor1.adicionarItem(livroDeFeitiço);
+        vendedor1.adicionarItem(espadaLonga);
+        vendedor1.adicionarItem(arcoLongo);
+        vendedor1.adicionarItem(besta);
+        vendedor1.adicionarItem(machadoDeBatalha);
 
+
+/**************************** ponto 11 ********************************/
+
+        System.out.println("Boa sorte!");
+        System.out.println("\nÀs portas de Eldoria e antes de iniciares a tua jornada, tens um vendedor onde podes comrar tudo o que precisas para enfrentar as maiores adversidades.\n");
+
+        // Exibindo os itens disponíveis para compra
         vendedor1.imprimirInventario();
-    }
 
-    /******************* Instanciar os personagens *************************/
-    public static Cavaleiro criarCavaleiro() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do Cavaleiro:");
-        String nome = scanner.nextLine();
-        return new Cavaleiro(nome, 0, 0, 0, 0);
-    }
 
-    public static Feiticeiro criarFeiticeiro() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do Feiticeiro:");
-        String nome = scanner.nextLine();
-        return new Feiticeiro(nome, 0, 0, 0, 0);
+            System.out.println("Deseja comprar algum item? (Digite o número correspondente ou 0 para avançar sem comprar)");
+
+            int opcao = scanner.nextInt() - 1;
+            vendedor1.vender(heroi, opcao);
     }
 
 
-    public static Arqueiro criarArqueiro() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do Arqueiro:");
-        String nome = scanner.nextLine();
-        return new Arqueiro(nome, 0, 0, 0, 0);
+        public static void main (String[]args){
+            labirinto();
+        }
     }
 
-    /********************* Instancia 13 itens **********************/
-
-    public static void main(String[] args) {
-        labirinto();
-    }
-}
 
 //! APÓS A CONCLUSÃO FAZER JAVADOC!
