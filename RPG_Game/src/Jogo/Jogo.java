@@ -5,6 +5,7 @@ import Itens.ItemHeroi;
 import Itens.PocaoHP;
 import Itens.TiposHeroi;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class Jogo {
         return new Arqueiro(nome, 0, 0, 0, 0);
     }
 
-    public static void labirinto() {
+    public static void comecarJogo() {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -169,7 +170,7 @@ public class Jogo {
 
 
         // instanciar inimigos
-        NPC LordeTrevas = new NPC("Lorde das Trevas", 100, 10);
+        NPC Hades = new NPC("Hades", 100, 10);
         //npc1.mostrarDetalhes();
 
         NPC Dragao = new NPC("Dragão Ancião", 80, 8);
@@ -183,7 +184,6 @@ public class Jogo {
 
         NPC Demonio = new NPC("Demônio das Sombra", 90, 9);
         //npc5.mostrarDetalhes();
-        // Resto da lógica do labirinto...
 
         // instância do arraylist que tem que ser passado como parâmetro na instância da PocaoHP
         ArrayList<TiposHeroi> tiposHeroi = new ArrayList<>();
@@ -192,11 +192,11 @@ public class Jogo {
         tiposHeroi.add(TiposHeroi.FEITICEIRO);
 
 
-        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 300, tiposHeroi, 60);
+        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 5, tiposHeroi, 60);
 
-        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 40, tiposHeroi, 90);
+        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 10, tiposHeroi, 90);
 
-        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 10, tiposHeroi, 25);
+        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 15 , tiposHeroi, 25);
 
 
         // Todos os tipo de heroi
@@ -221,15 +221,16 @@ public class Jogo {
         heroiFeiticeiro.add(TiposHeroi.FEITICEIRO);
         // Faça o que precisa com a combinacao7
 
-        Arma lanca = new Arma("Lança", 50, todosTiposHeroi, 20);
-        Arma adaga = new Arma("Adaga", 50, todosTiposHeroi, 20);
-        Arma cetroArcano = new Arma("Cetro Arcano", 50, todosTiposHeroi, 20);
-        Arma varinhaMagica = new Arma("Varinha Mágica", 50, heroiFeiticeiro, 20);
-        Arma livroDeFeitiço = new Arma("Livro de feitiço", 50, heroiFeiticeiro, 20);
+        Arma lanca = new Arma("Lança", 5, todosTiposHeroi, 20);
+        Arma adaga = new Arma("Adaga", 5, todosTiposHeroi, 20);
+        Arma cetroArcano = new Arma("Cetro Arcano", 10, todosTiposHeroi, 20);
+        Arma varinhaMagica = new Arma("Varinha Mágica", 8, heroiFeiticeiro, 2);
+        Arma livroDeFeitiço = new Arma("Livro de feitiço",10, heroiFeiticeiro, 20);
         Arma espadaLonga = new Arma("Espada Longa", 50, heroiCavaleiro, 20);
         Arma arcoLongo = new Arma("Arco Longo", 50, heroiArqueiro, 20);
         Arma besta = new Arma("Besta", 50, heroiArqueiro, 20);
         Arma machadoDeBatalha = new Arma("Machado de batalha", 50, heroiCavaleiro, 20);
+        Arma espada = new Arma("Espada", 10, heroiCavaleiro, 20);
 
 
         //instanciar vendedor com inventário
@@ -246,6 +247,7 @@ public class Jogo {
         vendedor1.adicionarItem(arcoLongo);
         vendedor1.adicionarItem(besta);
         vendedor1.adicionarItem(machadoDeBatalha);
+        vendedor1.adicionarItem(espada);
 
 
 /**************************** ponto 11 ********************************/
@@ -256,16 +258,115 @@ public class Jogo {
         // Exibindo os itens disponíveis para compra
         vendedor1.imprimirInventario();
 
-
             System.out.println("Deseja comprar algum item? (Digite o número correspondente ou 0 para avançar sem comprar)");
 
             int opcao = scanner.nextInt() - 1;
             vendedor1.vender(heroi, opcao);
+
+
+        System.out.println("Inicio da jornada tem 2 opções");
+        System.out.println("1 - Vale dos mortos");
+        System.out.println("2 - Montanha");
+
+        int op;
+        do{
+            op = scanner.nextInt();
+        }while (op < 0 && op > 2);
+
+        labirinto(op, heroi);
+    }
+
+
+
+    public static void labirinto(int op, Heroi heroi){
+        Scanner scanner = new Scanner(System.in);
+
+        //int opcao =
+        switch (op)
+        {
+            case 1: {
+                System.out.println("\nCorajoso! É preciso audácia para enfrentar o Vale dos Mortos.");
+                System.out.println("\nTerá de enfrendar Hades, o deus das trevas. Boa sorte!");
+
+                heroi.atacar(new NPC("Hades", 100, 10));
+
+                System.out.println("\nEscolha uma opção: ");
+                System.out.println("5 - Cidade");
+                System.out.println("6 - Floresta");
+
+                int opcao;
+                do{
+                    opcao = scanner.nextInt();
+                }while (op < 5 && op > 6);
+
+                labirinto(opcao, heroi);
+
+                break;}
+
+            case 2: {
+                //MONTANHA
+
+
+                break;}
+
+            case 3: {
+
+
+
+                break;}
+
+            case 4: {
+
+
+
+                break;}
+            case 5: {
+
+
+
+                break;}
+            case 6: {
+
+
+
+                break;}
+            case 7: {
+
+
+
+                break;}
+            case 8: {
+
+
+
+                break;}
+            case 9: {
+
+
+
+                break;}
+            case 10: {
+
+
+
+                break;}
+            case 11: {
+
+
+
+                break;}
+            case 12: {
+
+
+
+                break;}
+
+        }
     }
 
 
         public static void main (String[]args){
-            labirinto();
+            comecarJogo();
         }
     }
 

@@ -90,16 +90,17 @@ public class Vendedor {
 
                     heroi.decrementarOuro(item.getPreco()); // Decrementa o ouro do heroi pelo preço do item
 
+                    ItemHeroi itemSelecionado = getInventario().get(index);
+
                     inventario.remove(item);                // Remove o item do inventario do vendedor
-                    System.out.println("Compra realizada com sucesso!");
-                    ItemHeroi itemSelecionado = getInventario().get(index - 1);
-                    System.out.println("Você comprou o item: " + itemSelecionado.getNome());
-                    System.out.println("Seu ouro restante: " + heroi.getOuro());
+                    System.out.println("\nCompra realizada com sucesso!");
+                    System.out.println("\nCompraste o item: " + itemSelecionado.getNome());
+                    System.out.println("Ouro que ainda tens: " + heroi.getOuro());
 
 
 
                 } else {
-                    System.out.println("O herói não possui ouro suficiente para comprar este item.");
+                    System.out.println("Oops! Não tens ouro suficiente para comprar isso!.");
                 }
             } else {
                 System.out.println("Item do vendedor não encontrado");
