@@ -58,7 +58,17 @@ public class Feiticeiro extends Heroi {
         System.out.println("Força: " + getForca());
         System.out.println("Nível: " + getNivel());
         System.out.println("Ouro: " + getOuro());
-        System.out.println("Arma: " + getArma().getNome());
-        System.out.println("Poções: " + getPocoes().size());
+
+        System.out.println("Arma:");
+        if (getArma() != null) {
+            System.out.println("- " + getArma().getNome());
+        } else {
+            System.out.println("Nenhuma arma equipada.");
+        }
+
+        System.out.println("Poções:");
+        for (PocaoHP pocao : getPocoes()) {
+            System.out.println("- " + pocao.getNome());
+        }
     }
 }

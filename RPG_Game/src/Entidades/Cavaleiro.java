@@ -53,6 +53,23 @@ public class Cavaleiro extends Heroi {
      */
     @Override
     public void mostrarDetalhes() {
+        System.out.println("Detalhes do Cavaleiro:");
+        System.out.println("Nome: " + getNome());
+        System.out.println("Vida: " + getVida());
+        System.out.println("Força: " + getForca());
+        System.out.println("Nível: " + getNivel());
+        System.out.println("Ouro: " + getOuro());
 
+        System.out.println("Arma:");
+        if (getArma() != null) {
+            System.out.println("- " + getArma().getNome());
+        } else {
+            System.out.println("Nenhuma arma equipada.");
+        }
+
+        System.out.println("Poções:");
+        for (PocaoHP pocao : getPocoes()) {
+            System.out.println("- " + pocao.getNome());
+        }
     }
 }

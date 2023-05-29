@@ -4,7 +4,7 @@ import Entidades.Heroi;
 
 import java.util.ArrayList;
 
-public class PocaoHP extends ItemHeroi {
+public class  PocaoHP extends ItemHeroi {
 
     private int curar;
 

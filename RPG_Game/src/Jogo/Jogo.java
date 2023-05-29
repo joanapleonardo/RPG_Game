@@ -23,7 +23,7 @@ public class Jogo {
 
     public static Feiticeiro criarFeiticeiro() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do Feiticeiro:");
+        System.out.println("\nQual é o nome do Feiticeiro?");
         String nome = scanner.nextLine();
         return new Feiticeiro(nome, 0, 0, 0, 0);
     }
@@ -31,7 +31,7 @@ public class Jogo {
 
     public static Arqueiro criarArqueiro() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do Arqueiro:");
+        System.out.println("\nQual é o nome do Arqueiro?");
         String nome = scanner.nextLine();
         return new Arqueiro(nome, 0, 0, 0, 0);
     }
@@ -43,7 +43,7 @@ public class Jogo {
         String resposta = "";
         do {
             /*********** Selecionar o tipo de herói *******************/
-            int heroiEscolhido; // só usei uma int porque é mais eficiente em termos computacionais, apesar de me dar mais trabalho no tratamento de excepções do que uma string
+            int heroiEscolhido;
             Heroi heroi = null;
             boolean opcaoValida = false;
 
@@ -172,15 +172,10 @@ public class Jogo {
                     "Força: " + heroi.getForca() + ", Vida: " + heroi.getVida() + ", Ouro: " + heroi.getOuro() + ".");
 
 
-
-
-
-
-
             venceu = labirinto(0, heroi);
 
             if(venceu==true){
-                System.out.println("yei");
+                System.out.println("O inimigo foi derrotado");
                 heroi.mostrarDetalhes();
             } else {
                 System.out.println("game over");
@@ -221,13 +216,6 @@ public class Jogo {
         tiposHeroi.add(TiposHeroi.FEITICEIRO);
 
 
-        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 5, tiposHeroi, 60);
-
-        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 10, tiposHeroi, 90);
-
-        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 15, tiposHeroi, 25);
-
-
         // Todos os tipo de heroi
         ArrayList<TiposHeroi> todosTiposHeroi = new ArrayList<>();
         todosTiposHeroi.add(TiposHeroi.CAVALEIRO);
@@ -250,15 +238,21 @@ public class Jogo {
         heroiFeiticeiro.add(TiposHeroi.FEITICEIRO);
         // Faça o que precisa com a combinacao7
 
+
+
+        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 5, tiposHeroi, 60);
+        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 10, tiposHeroi, 90);
+        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 15, tiposHeroi, 25);
+
         Arma lanca = new Arma("Lança", 5, todosTiposHeroi, 20);
         Arma adaga = new Arma("Adaga", 5, todosTiposHeroi, 20);
         Arma cetroArcano = new Arma("Cetro Arcano", 10, todosTiposHeroi, 20);
         Arma varinhaMagica = new Arma("Varinha Mágica", 8, heroiFeiticeiro, 2);
         Arma livroDeFeitiço = new Arma("Livro de feitiço", 10, heroiFeiticeiro, 20);
-        Arma espadaLonga = new Arma("Espada Longa", 50, heroiCavaleiro, 20);
-        Arma arcoLongo = new Arma("Arco Longo", 50, heroiArqueiro, 20);
-        Arma besta = new Arma("Besta", 50, heroiArqueiro, 20);
-        Arma machadoDeBatalha = new Arma("Machado de batalha", 50, heroiCavaleiro, 20);
+        Arma espadaLonga = new Arma("Espada Longa", 20, heroiCavaleiro, 20);
+        Arma arcoLongo = new Arma("Arco Longo", 20, heroiArqueiro, 20);
+        Arma besta = new Arma("Besta", 20, heroiArqueiro, 20);
+        Arma machadoDeBatalha = new Arma("Machado de batalha", 15, heroiCavaleiro, 20);
         Arma espada = new Arma("Espada", 10, heroiCavaleiro, 20);
 
 
@@ -280,13 +274,12 @@ public class Jogo {
         vendedor1.adicionarItem(espada);
 
 
-        //int opcao =
         switch (op)
         {
-            case 0: {
+            case 0:
                 System.out.println("\nÀs portas de Eldoria e antes de iniciares a tua jornada, tens um vendedor onde podes comrar tudo o que precisas para enfrentar as maiores adversidades.\n");
 
-                // Exibindo os itens disponíveis para compra
+                //Mostrar itens disponíveis para compra
                 vendedor1.imprimirInventario();
 
                 System.out.println("Deseja comprar algum item? (Digite o número correspondente ou 0 para avançar sem comprar)");
@@ -301,91 +294,164 @@ public class Jogo {
 
                     op = scanner.nextInt();
 
-                } while (op < 0 && op > 2);
+                } while (op != 1 && op != 2);
 
                 labirinto(op, heroi);
-            }
+
             break;
 
-            case 1: {
+            case 1:
                 System.out.println("\nCorajoso! É preciso audácia para enfrentar o Vale dos Mortos.");
                 System.out.println("\nTerá de enfrendar Hades, o deus das trevas. Boa sorte!");
 
                 heroi.atacar(Hades);
 
                 System.out.println("\nEscolha uma opção: ");
-                System.out.println("5 - Cidade");
-                System.out.println("6 - Floresta");
+                System.out.println("2 - Montanha");
+                System.out.println("3 - Floresta");
 
                 do{
                     op = scanner.nextInt();
-                }while (op < 5 && op > 6);
+                }while (op != 2 && op != 3);
 
                 labirinto(op, heroi);
 
-                break;}
+                break;
 
             case 2:
-                System.out.println("Casa 2");
-                //MONTANHA
+                System.out.println("\nEspero que estejas preparado para atravessar a Montanha do Dragão.");
+                System.out.println("\nTem cuidado porque Dragões existem mesmo!!");
+                System.out.println("\n OH OH, la vem ele!!!");
 
+                heroi.atacar(Dragao);
 
+               labirinto (4,heroi);
                 break;
 
             case 3:
+                System.out.println("\nSempre a avançar!");
+                System.out.println("Vamos entrar na floresta encantada!");
+                System.out.println("Cuidado com os contrabandistas e vendedores de banha da cobra!");
 
+                System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
+                System.out.println("Interessado em algum dos meus itens?");
+                vendedor1.imprimirInventario();
 
+                System.out.println("Insira o número correspondente ou 0 para avançar sem comprar)");
+
+                int opcao = scanner.nextInt() - 1;
+                vendedor1.vender(heroi, opcao);
 
                 break;
 
             case 4:
+                System.out.println("\nUfff!! Que grande batalha contra o Dragão!!");
+                System.out.println("Ainda bem que chegamos a uma aldeia bem pitoresca onde poderemos descansar");
+                System.out.println("Foi adicionado ao teu inventário uma Poção para recuperares a energia.");
 
+                heroi.adicionarPocao(pocaoSOS);
 
+                System.out.println("\nChegamos a uma encruzilhada: ");
+                System.out.println("Por onde vamos seguir");
+                System.out.println("5 - Esquerda");
+                System.out.println("3 - Direita");
 
+                do{
+                    op = scanner.nextInt();
+                }while (op != 2 && op != 3);
+
+                labirinto(op, heroi);
                 break;
 
             case 5:
-                System.out.println("casa5");
+                System.out.println("\nDecisões... Decisões");
+                System.out.println("\nEscolha uma opção: ");
+                System.out.println("6 - Atravessar o rio a nado?");
+                System.out.println("7 - Atravessar uma ponte em muito mau estado?");
 
+                do{
+                    op = scanner.nextInt();
+                }while (op != 6 && op != 7);
 
+                labirinto(op, heroi);
+            break;
 
+            case 6:
+                System.out.println("\nO rio está perigoso!");
+                System.out.println("Mas há perigos maiores do que a corrente...");
+
+                System.out.println("\nNECROMANTE: Olá, Olá! Quem temos aqui?");
+                System.out.println("Espero que gostes da vista porque a tua alma ficará aprisionada aqui para sempre!");
+                System.out.println("HA HA HA HA HA!");
+
+                heroi.atacar(Necromante);
+
+                System.out.println("\nEscolha uma opção: ");
+                System.out.println("7 - Atravessar uma ponte em muito mau estado?");
+                System.out.println("11 - Pedir boleia ao barqueiro");
+
+                do{
+                    op = scanner.nextInt();
+                }while (op != 7 && op != 11);
+
+                labirinto(op, heroi);
                 break;
 
-            case 6: System.out.println("casa6");
-
-
-
-                break;
             case 7:
+                System.out.println("casa 7");
+                System.out.println("\nEscolha uma opção: ");
+                System.out.println("8 - xxxx");
+                System.out.println("9 - xxxx");
 
+                do{
+                    op = scanner.nextInt();
+                }while (op != 8 && op != 9);
 
+                labirinto(op, heroi);
 
                 break;
             case 8:
+                System.out.println("Casa 8");
+                //MONTANHA
 
+
+                System.out.println("Vai para casa 10");
+
+                labirinto (10,heroi);
+
+                labirinto(op, heroi);
 
 
                 break;
             case 9:
+                System.out.println("fim do jogo");
 
 
                 break;
             case 10:
+                System.out.println("Casa 10");
+                //MONTANHA
+
+
+                System.out.println("Vai para casa 9");
+
+                labirinto (9,heroi);
+
+                labirinto(op, heroi);
 
 
 
                 break;
             case 11:
+                System.out.println("Casa 11");
+                //MONTANHA
 
 
+                System.out.println("Vai para casa 9");
 
-                break;
-            case 12:
+                labirinto (9,heroi);
 
-
-
-                break;
-            default:
+                labirinto(op, heroi);
 
                 break;
         }

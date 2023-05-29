@@ -59,7 +59,6 @@ public class Vendedor {
      * @param index
      */
     public void vender(Heroi heroi, int index) { //this.inventario.getIndex()
-        // Verifica se o heroi possui ouro suficiente para comprar o item
 
         if (index >= 0 && index < inventario.size()) { // verifica se o indice está entre 0 (item 1) e o maior valor de índice do array inventário
             ItemHeroi item = inventario.get(index);    // escolhe o item que está no arraylist inventário que tem como parametro o indice introduzido(aparece na lista de inventario)
