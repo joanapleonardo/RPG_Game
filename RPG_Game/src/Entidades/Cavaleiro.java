@@ -17,42 +17,48 @@ public class Cavaleiro extends Heroi {
     @Override
     public Entidade atacar(NPC npc) {
 
+        boolean existeArma = true;
 
-        while (this.getVida() >= 0 && npc.getVida() >= 0) {
-            // O inimigo ataca primeiro (80% da força original)
-            int danoInimigo = (int) (npc.getForca() * 0.8); // sofre apenas 80% do dano porque ele tem armardura
-            this.subtrairVida(danoInimigo); // que é a quantidade passada no parametro da funcao na classe Heroi
-            System.out.println(this.getVida());
+        if(this.getArma() == null) {
+            existeArma = false;
+        }
 
-            // Verifica se o herói ainda está vivo
-            if (this.getVida() <= 0) {
-                System.out.println("O herói foi derrotado.");
+        if(existeArma == true) {
 
-            } else {
-                // O herói ataca
-                int danoHeroi = this.getForca() + this.getArma().getAtaque();
-                npc.setVida(npc.getVida() - danoHeroi);
-                System.out.println(npc.getVida());
-                //npc.subtrairVida(danoHeroi);
+            while (this.getVida() >= 0 && npc.getVida() >= 0) {
+                // O inimigo ataca primeiro (80% da força original)
+                int danoInimigo = (int) (npc.getForca() * 0.8); // sofre apenas 80% do dano porque ele tem armardura
+                this.subtrairVida(danoInimigo); // que é a quantidade passada no parametro da funcao na classe Heroi
+                System.out.println(this.getVida());
 
-                // Verifica se o inimigo ainda está vivo
-                if (npc.getVida() <= 0) {
-                    System.out.println("O herói venceu!");
-                    this.subirNivel();
-                    this.incrementarVida(10);
-                    this.incrementarForca(1);
-                    this.incrementarOuro(10);
+                // Verifica se o herói ainda está vivo
+                if (this.getVida() >= 0) {
+                    // O herói ataca
+                    int danoHeroi = this.getForca() + this.getArma().getAtaque();
+                    npc.setVida(npc.getVida() - danoHeroi);
+                    System.out.println(npc.getVida());
+                    //npc.subtrairVida(danoHeroi);
 
+                    // Verifica se o inimigo ainda está vivo
+                    if (npc.getVida() <= 0) {
+                        //System.out.println("O herói venceu!");
+                        this.subirNivel();
+                        this.incrementarVida(10);
+                        this.incrementarForca(1);
+                        this.incrementarOuro(10);
+
+                    }
                 }
             }
         }
-        if (npc.getVida() <= 0) {
+
+        if (npc.getVida() <= 0 && existeArma == true) {
             System.out.println("O herói venceu!");
             return this;
         } else {
+            System.out.println("O herói foi derrotado.");
             return npc;
         }
-
     }
 
 
@@ -75,9 +81,12 @@ public class Cavaleiro extends Heroi {
             System.out.println("Nenhuma arma equipada.");
         }
 
-        System.out.println("Poções:");
-        for (PocaoHP pocao : getPocoes()) {
-            System.out.println("- " + pocao.getNome());
+        if(getPocoes().size() > 0) {
+            System.out.println("Poções:");
+            for (PocaoHP pocao : getPocoes()) {
+                System.out.println("- " + pocao.getNome());
+            }
         }
+        else System.out.println("Sem poções!");
     }
 }

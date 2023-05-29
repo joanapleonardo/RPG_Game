@@ -36,6 +36,7 @@ public class Jogo {
         return new Arqueiro(nome, 0, 0, 0, 0);
     }
 
+
         public static void main (String[]args){
 
         Scanner scanner = new Scanner(System.in);
@@ -188,11 +189,30 @@ public class Jogo {
         }while (resposta.equals("S"));
     }
 
+    private static void reset(String message)
+    {
+        if(message != null) {
 
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("\n" + message + "\n");
+
+            int op;
+            do{
+                System.out.println("\n1 - Continuar a jogar!");
+                System.out.println("\n2 - Sair");
+                op = scanner.nextInt();
+            }while (op < 1 || op > 2);
+
+            if(op == 1) {
+                main(null);
+            }
+        }
+    }
 
     public static boolean labirinto(int op, Heroi heroi){
         Scanner scanner = new Scanner(System.in);
 
+        boolean p = false;
         // instanciar inimigos
         NPC Hades = new NPC("Hades", 100, 10);
         //npc1.mostrarDetalhes();
@@ -281,10 +301,6 @@ public class Jogo {
 
                 //Mostrar itens disponíveis para compra
                 vendedor1.imprimirInventario();
-
-                System.out.println("Deseja comprar algum item? (Digite o número correspondente ou 0 para avançar sem comprar)");
-
-                int opcao = scanner.nextInt() - 1;
                 vendedor1.vender(heroi);
 
                 do {
@@ -304,17 +320,24 @@ public class Jogo {
                 System.out.println("\nCorajoso! É preciso audácia para enfrentar o Vale dos Mortos.");
                 System.out.println("\nTerá de enfrendar Hades, o deus das trevas. Boa sorte!");
 
-                heroi.atacar(Hades);
+                p = (heroi.atacar(Hades) == heroi);
+                if (p == true) {
 
-                System.out.println("\nEscolha uma opção: ");
-                System.out.println("2 - Montanha");
-                System.out.println("3 - Floresta");
+                    heroi.usarPocao();
 
-                do{
-                    op = scanner.nextInt();
-                }while (op != 2 && op != 3);
+                    heroi.mostrarDetalhes();
 
-                labirinto(op, heroi);
+                    System.out.println("\nEscolha uma opção: ");
+                    System.out.println("2 - Montanha");
+                    System.out.println("3 - Floresta");
+
+                    do{
+                        op = scanner.nextInt();
+                    }while (op != 2 && op != 3);
+
+                    labirinto(op, heroi);
+                }
+                else reset("Game Over!!!");
 
                 break;
 
@@ -323,9 +346,16 @@ public class Jogo {
                 System.out.println("\nTem cuidado porque Dragões existem mesmo!!");
                 System.out.println("\n OH OH, la vem ele!!!");
 
-                heroi.atacar(Dragao);
+                p = (heroi.atacar(Dragao) == heroi);
+                if (p == true) {
+                    heroi.usarPocao();
 
-               labirinto (4,heroi);
+                    heroi.mostrarDetalhes();
+
+                    labirinto (4,heroi);
+                }
+                else reset("Game Over!!!");
+
                 break;
 
             case 3:
@@ -334,12 +364,21 @@ public class Jogo {
                 System.out.println("Cuidado com os contrabandistas e vendedores de banha da cobra!");
 
                 System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
-                System.out.println("Interessado em algum dos meus itens?");
+                System.out.println("Interessado em algum dos meus itens?\n");
+
+                System.out.println("Detalhes do vendedor: ");
+                heroi.mostrarDetalhes();
+
+                System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
+                System.out.println("Interessado em algum dos meus itens?\n");
+
                 vendedor1.imprimirInventario();
 
                 System.out.println("Insira o número correspondente ou 0 para avançar sem comprar)");
 
                 vendedor1.vender(heroi);
+
+                labirinto(5, heroi);
 
                 break;
 
@@ -383,17 +422,25 @@ public class Jogo {
                 System.out.println("Espero que gostes da vista porque a tua alma ficará aprisionada aqui para sempre!");
                 System.out.println("HA HA HA HA HA!");
 
-                heroi.atacar(Necromante);
+                p = (heroi.atacar(Necromante) == heroi);
+                if (p == true) {
 
-                System.out.println("\nEscolha uma opção: ");
-                System.out.println("7 - Atravessar uma ponte em muito mau estado?");
-                System.out.println("11 - Pedir boleia ao barqueiro");
+                    heroi.usarPocao();
 
-                do{
-                    op = scanner.nextInt();
-                }while (op != 7 && op != 11);
+                    heroi.mostrarDetalhes();
 
-                labirinto(op, heroi);
+                    System.out.println("\nEscolha uma opção: ");
+                    System.out.println("7 - Atravessar uma ponte em muito mau estado?");
+                    System.out.println("11 - Pedir boleia ao barqueiro");
+
+                    do {
+                        op = scanner.nextInt();
+                    } while (op != 7 && op != 11);
+
+                    labirinto(op, heroi);
+                }
+                else reset("Game Over!!!");
+
                 break;
 
             case 7:
@@ -418,13 +465,11 @@ public class Jogo {
 
                 labirinto (10,heroi);
 
-                labirinto(op, heroi);
-
 
                 break;
             case 9:
-                System.out.println("fim do jogo");
 
+                reset("Congratulations!!!");
 
                 break;
             case 10:
@@ -435,8 +480,6 @@ public class Jogo {
                 System.out.println("Vai para casa 9");
 
                 labirinto (9,heroi);
-
-                labirinto(op, heroi);
 
 
 
@@ -449,8 +492,6 @@ public class Jogo {
                 System.out.println("Vai para casa 9");
 
                 labirinto (9,heroi);
-
-                labirinto(op, heroi);
 
                 break;
         }

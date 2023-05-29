@@ -61,26 +61,38 @@ public abstract class Heroi extends Entidade {
      * Metodo que usa pocao para se recuperar
      */
     public void usarPocao() {
-        // Declaração da lista de poções disponíveis
-        Scanner scanner = new Scanner(System.in);
-        int i;
-        for (PocaoHP pocao: this.pocoes) {
-            System.out.print(pocao.getNome());
-            System.out.println(pocao.getCurar());
+
+        if(this.pocoes.size() > 0)
+        {
+            // Declaração da lista de poções disponíveis
+            Scanner scanner = new Scanner(System.in);
+            int i = 0;
+            System.out.print("\n----------------------\n");
+            for (PocaoHP pocao: pocoes) {
+                System.out.print((++i) + " - " + pocao.getNome() + " (" + pocao.getCurar() + ")\n");
+            }
+            System.out.print("----------------------\n");
+
+            do {
+                System.out.println("\nDiz-me a poção que queres usar ou zero para não usar nenhuma");
+                System.out.print("->");
+                i = scanner.nextInt();
+
+            }while(i<0 || i > pocoes.size());
+
+            if(i > 0)
+            {
+                i--;
+                incrementarVida(pocoes.get(i).getCurar());
+
+                System.out.println("Parabens! Usou a poçao " + pocoes.get(i).getNome() + " e curou "+ pocoes.get(i).getCurar());
+                pocoes.remove(i);
+                System.out.println("A sua vida depois de usar a poção é: " + getVida());
+            }
         }
-        do {
-            System.out.println("Diz-me a poção que queres usar");
-            i = scanner.nextInt();
-
-        }while(i<0 || i>this.pocoes.size());
-
-
-        this.incrementarVida(pocoes.get(i).getCurar());
-
-        System.out.println("Parabens! Usou a poçao " + pocoes.get(i).getNome() + " e curou "+ pocoes.get(i).getCurar());
-        this.pocoes.remove(i);
-        System.out.println("A sua vida depois de usar a poção é: " + getVida());
-
+        else {
+            System.out.println("Sem Poção!");
+        }
     }
 
     /**
