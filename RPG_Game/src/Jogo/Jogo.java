@@ -118,7 +118,7 @@ public class Jogo {
                 if (dificuldade == 1) {
                     pontosCriacao = 300;
                     System.out.println("\nTens 300 pontos de criação da personagem.");
-                } else if (dificuldade == 2) {
+                } else if ( dificuldade == 2) {
                     pontosCriacao = 220;
                     System.out.println("Tens tem 220 pontos de criação da personagem.");
                 } else {
@@ -181,6 +181,7 @@ public class Jogo {
 
             if(venceu==true){
                 System.out.println("yei");
+                heroi.mostrarDetalhes();
             } else {
                 System.out.println("game over");
                 System.out.println("deseja tentar de novo? S/N");
@@ -310,7 +311,7 @@ public class Jogo {
                 System.out.println("\nCorajoso! É preciso audácia para enfrentar o Vale dos Mortos.");
                 System.out.println("\nTerá de enfrendar Hades, o deus das trevas. Boa sorte!");
 
-                heroi.atacar(new NPC("Hades", 100, 10));
+                heroi.atacar(Hades);
 
                 System.out.println("\nEscolha uma opção: ");
                 System.out.println("5 - Cidade");
