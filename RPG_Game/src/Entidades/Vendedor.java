@@ -60,6 +60,7 @@ public class Vendedor {
      */
     public void vender(Heroi heroi, int index) { //this.inventario.getIndex()
         // Verifica se o heroi possui ouro suficiente para comprar o item
+
         if (index >= 0 && index < inventario.size()) { // verifica se o indice está entre 0 (item 1) e o maior valor de índice do array inventário
             ItemHeroi item = inventario.get(index);    // escolhe o item que está no arraylist inventário que tem como parametro o indice introduzido(aparece na lista de inventario)
 
@@ -73,12 +74,13 @@ public class Vendedor {
             }
 
             if (permitido) {
-
+                String itemSelecionado = getInventario().get(index).getNome();
                 if (heroi.getOuro() >= item.getPreco()) {  // validação se o herói possui ouro
                     // Verifica se o item é uma Arma e atualiza a arma do heroi
                     if (item instanceof Arma) { // verifica se item do tipo é uma instancia de Arma
                         Arma arma = (Arma) item; // casting, trata o item como uma instancia de arma, ja qe foi verificado acima
                         heroi.setArma(arma);    // arma da classe Heroi armazena um item (que ja foi verificado e convertido pro tipo arma)
+                        inventario.remove(item);                // Remove o item do inventario do vendedor
                     }
                     // Se não é uma arma é uma poção, então, verifica se o item é uma PocaoHP e adiciona a poção ao heroi
                     else if (item instanceof PocaoHP) { // verifica se item do tipo é uma instancia de PocaoHP
@@ -90,11 +92,10 @@ public class Vendedor {
 
                     heroi.decrementarOuro(item.getPreco()); // Decrementa o ouro do heroi pelo preço do item
 
-                    ItemHeroi itemSelecionado = getInventario().get(index);
 
-                    inventario.remove(item);                // Remove o item do inventario do vendedor
+
                     System.out.println("\nCompra realizada com sucesso!");
-                    System.out.println("\nCompraste o item: " + itemSelecionado.getNome());
+                    System.out.println("\nCompraste o item: " + itemSelecionado);
                     System.out.println("Ouro que ainda tens: " + heroi.getOuro());
 
 
@@ -108,6 +109,10 @@ public class Vendedor {
             }
 
             heroi.mostrarDetalhes();
+        } else if (index>inventario.size()) {
+
+            System.out.println("Opção Invalida");
+
         }
     }
 }
