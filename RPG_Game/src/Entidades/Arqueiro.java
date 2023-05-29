@@ -11,17 +11,16 @@ public class Arqueiro extends Heroi {
      * Método subscrito da classe NPC
      * @param npc
      */
+
     @Override
-    public void atacar(NPC npc) {
+    public Entidade atacar(NPC npc) {
 
-        npc.mostrarDetalhes();
-
-        while (this.getVida()>=0 && npc.getVida()>=0) {
+        while (this.getVida() >= 0 && npc.getVida() >= 0) {
 
             // O herói ataca
             int danoHeroi = this.getForca() + this.getArma().getAtaque();
             npc.setVida(npc.getVida() - danoHeroi);
-            System.out.println("Vida do inimigo: " + npc.getVida());
+            System.out.println(npc.getVida());
             //npc.subtrairVida(danoHeroi);
 
             // Verifica se o inimigo ainda está vivo
@@ -31,16 +30,23 @@ public class Arqueiro extends Heroi {
                 this.incrementarVida(10);
                 this.incrementarForca(1);
                 this.incrementarOuro(10);
+
             } else {
                 // O inimigo ataca)
                 int danoInimigo = (int) (npc.getForca() * 1.1); // 10% a mais do que devido a falta de proteçãop
                 this.subtrairVida(danoInimigo); // que é a quantidade passada no parametro da funcao na classe Heroi
-                System.out.println("Vida do inimigo: " + this.getVida());
+                System.out.println(this.getVida());
 
-                if (this.getVida() <= 0) {
-                    System.out.println("O herói foi derrotado.");
-                }
+
             }
+
+        }
+
+        if (this.getVida() <= 0) {
+            System.out.println("O herói foi derrotado.");
+            return npc;
+        }else{
+            return this;
         }
     }
 

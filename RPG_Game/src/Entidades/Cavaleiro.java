@@ -15,10 +15,10 @@ public class Cavaleiro extends Heroi {
      * @param npc
      */
     @Override
-    public void atacar(NPC npc) {
+    public Entidade atacar(NPC npc) {
 
 
-        while (this.getVida()>=0 && npc.getVida()>=0) {
+        while (this.getVida() >= 0 && npc.getVida() >= 0) {
             // O inimigo ataca primeiro (80% da força original)
             int danoInimigo = (int) (npc.getForca() * 0.8); // sofre apenas 80% do dano porque ele tem armardura
             this.subtrairVida(danoInimigo); // que é a quantidade passada no parametro da funcao na classe Heroi
@@ -27,6 +27,7 @@ public class Cavaleiro extends Heroi {
             // Verifica se o herói ainda está vivo
             if (this.getVida() <= 0) {
                 System.out.println("O herói foi derrotado.");
+
             } else {
                 // O herói ataca
                 int danoHeroi = this.getForca() + this.getArma().getAtaque();
@@ -41,10 +42,17 @@ public class Cavaleiro extends Heroi {
                     this.incrementarVida(10);
                     this.incrementarForca(1);
                     this.incrementarOuro(10);
+
                 }
             }
-
         }
+        if (npc.getVida() <= 0) {
+            System.out.println("O herói venceu!");
+            return this;
+        } else {
+            return npc;
+        }
+
     }
 
 

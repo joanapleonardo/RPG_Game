@@ -3,6 +3,7 @@ import Itens.Arma;
 import Itens.PocaoHP;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Classe abstrata Heroi, que deriva da classe mãe chamada Entidade
@@ -30,20 +31,22 @@ public abstract class Heroi extends Entidade {
         super(nome, vida, forca);
         this.nivel = nivel;
         this.ouro = ouro;
+        this.pocoes = new ArrayList<PocaoHP>();
     }
+
 
     /**
      * Método para confrontar o NPC
      * @param npc
      */
-    public abstract void atacar(NPC npc);
+    public abstract Entidade atacar(NPC npc);
 
     /**
      * Método para adicionar uma pocao ao ArrayList de PocaoHP
      * @param pocao
      */
     public void adicionarPocao(PocaoHP pocao) {  // MÉTODO NÃO PEDIDO NO ENUNCIADO
-        pocoes.add(pocao);
+        this.pocoes.add(pocao);
     }
 
     /**
@@ -56,35 +59,28 @@ public abstract class Heroi extends Entidade {
 
     /**
      * Metodo que usa pocao para se recuperar
-     * @param pocao
      */
-    public void usarPocao(PocaoHP pocao) {
-        // Imprimir o inventário do herói
-        System.out.println("Inventário do Herói:");
-        for (PocaoHP p : pocoes) {
-            System.out.println(p.getNome());
+    public void usarPocao() {
+        // Declaração da lista de poções disponíveis
+        Scanner scanner = new Scanner(System.in);
+        int i;
+        for (PocaoHP pocao: this.pocoes) {
+            System.out.print(pocao.getNome());
+            System.out.println(pocao.getCurar());
         }
+        do {
+            System.out.println("Diz-me a poção que queres usar");
+            i = scanner.nextInt();
 
-        // Perguntar qual poção deseja usar
-        System.out.println("Qual poção deseja usar?");
-        String nomePocao = ""; // Substitua pelo nome da poção selecionada
+        }while(i<0 || i>this.pocoes.size());
 
-        // Procurar a poção no inventário
-        PocaoHP pocaoSelecionada = buscarPocaoPorNome(nomePocao);
 
-        // Verificar se a poção foi encontrada
-        if (pocaoSelecionada != null) {
-            // Incrementar a vida do herói com a vida da poção
-            int vidaRecuperada = pocaoSelecionada.getCurar();
-            incrementarVida(vidaRecuperada);
+        this.incrementarVida(pocoes.get(i).getCurar());
 
-            // Remover a poção do inventário
-            pocoes.remove(pocaoSelecionada);
+        System.out.println("Parabens! Usou a poçao " + pocoes.get(i).getNome() + " e curou "+ pocoes.get(i).getCurar());
+        this.pocoes.remove(i);
+        System.out.println("A sua vida depois de usar a poção é: " + getVida());
 
-            System.out.println("Poção usada com sucesso!");
-        } else {
-            System.out.println("A poção selecionada não está no inventário do herói.");
-        }
     }
 
     /**

@@ -6,6 +6,7 @@ import Itens.PocaoHP;
 import Itens.TiposHeroi;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Vendedor {
@@ -58,60 +59,68 @@ public class Vendedor {
      * @param heroi
      * @param index
      */
-    public void vender(Heroi heroi, int index) { //this.inventario.getIndex()
+    /**
+     * Método vender que recebe como parametros um heroi da classe Heroi e um item da classe ItemHeroi
+     * @param heroi
+     */
+    public void vender(Heroi heroi) {
+        boolean continuarCompra = true;
+        ArrayList<ItemHeroi> itensComprados = new ArrayList<>();
 
-        if (index >= 0 && index < inventario.size()) { // verifica se o indice está entre 0 (item 1) e o maior valor de índice do array inventário
-            ItemHeroi item = inventario.get(index);    // escolhe o item que está no arraylist inventário que tem como parametro o indice introduzido(aparece na lista de inventario)
+        while (continuarCompra) {
+            System.out.println("Digite o índice do item que deseja comprar ou 0 para seguir em frente:");
+            Scanner scanner = new Scanner(System.in);
+            int index = scanner.nextInt();
 
-            boolean permitido = false;
-            for (TiposHeroi heroiPermitido : item.getTiposHeroi()) {
-                //System.out.println("tipo permitido" + heroiPermitido); // debug pra ver o tipo de  heroi permitido
-                //System.out.println("Debug" + heroi.getClass().getSimpleName() ); // debug que retorna o tipo de heroi
-                if (heroiPermitido.toString().equals(heroi.getClass().getSimpleName().toUpperCase())) {
-                    permitido = true;
-                }
-            }
+            if (index == 0) {
+                // Opção para seguir em frente sem comprar mais itens
+                System.out.println("Você escolheu seguir em frente sem comprar mais itens.");
+                System.out.println("--------------------");
+                continuarCompra = false;
+            } else if (index >= 1 && index <= inventario.size()) {
+                ItemHeroi item = inventario.get(index - 1);
 
-            if (permitido) {
-                String itemSelecionado = getInventario().get(index).getNome();
-                if (heroi.getOuro() >= item.getPreco()) {  // validação se o herói possui ouro
-                    // Verifica se o item é uma Arma e atualiza a arma do heroi
-                    if (item instanceof Arma) { // verifica se item do tipo é uma instancia de Arma
-                        Arma arma = (Arma) item; // casting, trata o item como uma instancia de arma, ja qe foi verificado acima
-                        heroi.setArma(arma);    // arma da classe Heroi armazena um item (que ja foi verificado e convertido pro tipo arma)
-                        inventario.remove(item);                // Remove o item do inventario do vendedor
+                if (!itensComprados.contains(item)) {
+                    boolean permitido = false;
+
+                    for (TiposHeroi heroiPermitido : item.getTiposHeroi()) {
+                        if (heroiPermitido.toString().equals(heroi.getClass().getSimpleName().toUpperCase())) {
+                            permitido = true;
+                            break;
+                        }
                     }
-                    // Se não é uma arma é uma poção, então, verifica se o item é uma PocaoHP e adiciona a poção ao heroi
-                    else if (item instanceof PocaoHP) { // verifica se item do tipo é uma instancia de PocaoHP
-                        PocaoHP pocao = (PocaoHP) item;
-                        heroi.adicionarPocao(pocao);    // pocao da classe Heroi armazena um item (que ja foi verificado e convertido pro tipo pocao)
+                    if (permitido) {
+                        if (heroi.getOuro() >= item.getPreco()) {
+                            if (item instanceof Arma) {
+                                Arma arma = (Arma) item;
+                                heroi.setArma(arma);
+                            } else if (item instanceof PocaoHP) {
+                                PocaoHP pocao = (PocaoHP) item;
+                                heroi.adicionarPocao(pocao);
+                            }
+
+                            heroi.decrementarOuro(item.getPreco());
+                            itensComprados.add(item);
+                            inventario.remove(item);
+                            System.out.println("Compra realizada com sucesso!");
+                            System.out.println("Você comprou o item: " + item.getNome());
+                            System.out.println("O valor do item é: " + item.getPreco());
+                            System.out.println("Seu ouro restante: " + heroi.getOuro());
+                            System.out.println("--------------------");
+                            imprimirInventario();
+                        } else {
+                            System.out.println("O herói não possui ouro suficiente para comprar este item.");
+                        }
+                    } else {
+                        System.out.println("Item do vendedor não encontrado");
                     }
-
-
-
-                    heroi.decrementarOuro(item.getPreco()); // Decrementa o ouro do heroi pelo preço do item
-
-
-
-                    System.out.println("\nCompra realizada com sucesso!");
-                    System.out.println("\nCompraste o item: " + itemSelecionado);
-                    System.out.println("Ouro que ainda tens: " + heroi.getOuro());
-
-
-
+                    heroi.mostrarDetalhes();
                 } else {
-                    System.out.println("Oops! Não tens ouro suficiente para comprar isso!.");
+                    System.out.println("Esse item já foi comprado. Escolha outro item.");
                 }
             } else {
-                System.out.println("Item do vendedor não encontrado");
-
+                System.out.println("Índice inválido. Por favor, escolha um índice válido.");
             }
-
-            heroi.mostrarDetalhes();
-        } else if (index>inventario.size()) {
-
-            System.out.println("Opção Invalida");
-
         }
     }
 }

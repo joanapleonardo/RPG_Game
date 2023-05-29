@@ -193,7 +193,7 @@ public class Jogo {
     public static boolean labirinto(int op, Heroi heroi){
         Scanner scanner = new Scanner(System.in);
 
-// instanciar inimigos
+        // instanciar inimigos
         NPC Hades = new NPC("Hades", 100, 10);
         //npc1.mostrarDetalhes();
 
@@ -285,7 +285,7 @@ public class Jogo {
                 System.out.println("Deseja comprar algum item? (Digite o número correspondente ou 0 para avançar sem comprar)");
 
                 int opcao = scanner.nextInt() - 1;
-                vendedor1.vender(heroi, opcao);
+                vendedor1.vender(heroi);
 
                 do {
                     System.out.println("Inicio da jornada tem 2 opções");
@@ -339,8 +339,7 @@ public class Jogo {
 
                 System.out.println("Insira o número correspondente ou 0 para avançar sem comprar)");
 
-                int opcao = scanner.nextInt() - 1;
-                vendedor1.vender(heroi, opcao);
+                vendedor1.vender(heroi);
 
                 break;
 
