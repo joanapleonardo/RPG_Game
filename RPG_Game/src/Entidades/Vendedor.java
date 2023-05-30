@@ -68,7 +68,7 @@ public class Vendedor {
         ArrayList<ItemHeroi> itensComprados = new ArrayList<>();
 
         while (continuarCompra) {
-            System.out.println("\nEsscreve o número do item que queres comprar ou 0 para seguir em frente:");
+            System.out.println("\nEscreve o número do item que queres comprar ou 0 para seguir em frente:");
             Scanner scanner = new Scanner(System.in);
             int index = scanner.nextInt();
 

@@ -85,9 +85,9 @@ public abstract class Heroi extends Entidade {
                 i--;
                 incrementarVida(pocoes.get(i).getCurar());
 
-                System.out.println("Parabens! Usou a poçao " + pocoes.get(i).getNome() + " e curou "+ pocoes.get(i).getCurar());
+                System.out.println("Ahhhh... \nUsou a poçao " + pocoes.get(i).getNome() + " e curou "+ pocoes.get(i).getCurar());
                 pocoes.remove(i);
-                System.out.println("A sua vida depois de usar a poção é: " + getVida());
+                System.out.println("A sua vida depois de usar a poção é: " + getVida() + ".\n");
             }
         }
         else {

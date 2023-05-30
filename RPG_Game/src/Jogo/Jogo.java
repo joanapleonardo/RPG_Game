@@ -6,6 +6,7 @@ import Itens.PocaoHP;
 import Itens.TiposHeroi;
 
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -214,19 +215,19 @@ public class Jogo {
 
         boolean p = false;
         // instanciar inimigos
-        NPC Hades = new NPC("Hades", 20000, 10000);
+        NPC Hades = new NPC("Hades", 140, 30);
         //npc1.mostrarDetalhes();
 
-        NPC Dragao = new NPC("Dragão Ancião", 60, 20);
+        NPC Dragao = new NPC("Dragão Ancião", 100, 20);
         //npc2.mostrarDetalhes();
 
-        NPC Necromante = new NPC("Necromante", 60, 20);
+        NPC Necromante = new NPC("Necromante", 80, 40);
         //npc3.mostrarDetalhes();
 
         NPC Bruxa = new NPC("Bruxa Malévola ", 15, 5);
         //npc4.mostrarDetalhes();
 
-        NPC Demonio = new NPC("Demônio das Sombra", 90, 30);
+        NPC Demonio = new NPC("Demônio das Sombra", 160, 50);
         //npc5.mostrarDetalhes();
 
         // instância do arraylist que tem que ser passado como parâmetro na instância da PocaoHP
@@ -265,15 +266,15 @@ public class Jogo {
         PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 10, tiposHeroi, 10);
 
         Arma lanca = new Arma("Lança", 5, todosTiposHeroi, 20);
-        Arma adaga = new Arma("Adaga", 5, todosTiposHeroi, 20);
-        Arma cetroArcano = new Arma("Cetro Arcano", 10, todosTiposHeroi, 20);
-        Arma varinhaMagica = new Arma("Varinha Mágica", 8, heroiFeiticeiro, 2);
-        Arma livroDeFeitiço = new Arma("Livro de feitiço", 10, heroiFeiticeiro, 20);
-        Arma espadaLonga = new Arma("Espada Longa", 20, heroiCavaleiro, 20);
-        Arma arcoLongo = new Arma("Arco Longo", 20, heroiArqueiro, 20);
-        Arma besta = new Arma("Besta", 20, heroiArqueiro, 20);
-        Arma machadoDeBatalha = new Arma("Machado de batalha", 15, heroiCavaleiro, 20);
-        Arma espada = new Arma("Espada", 10, heroiCavaleiro, 20);
+        Arma adaga = new Arma("Adaga", 8, todosTiposHeroi, 30);
+        Arma cetroArcano = new Arma("Cetro Arcano", 10, todosTiposHeroi, 40);
+        Arma varinhaMagica = new Arma("Varinha Mágica", 8, heroiFeiticeiro, 30);
+        Arma livroDeFeitiço = new Arma("Livro de feitiço", 10, heroiFeiticeiro, 40);
+        Arma espadaLonga = new Arma("Espada Longa", 20, heroiCavaleiro, 80);
+        Arma arcoLongo = new Arma("Arco Longo", 20, heroiArqueiro, 80);
+        Arma besta = new Arma("Besta", 20, heroiArqueiro, 80);
+        Arma machadoDeBatalha = new Arma("Machado de batalha", 15, heroiCavaleiro, 45);
+        Arma espada = new Arma("Espada", 10, heroiCavaleiro, 40);
 
 
         //instanciar vendedor com inventário
@@ -393,12 +394,12 @@ public class Jogo {
 
                 System.out.println("\nChegamos a uma encruzilhada: ");
                 System.out.println("Por onde vamos seguir");
-                System.out.println("5 - Esquerda");
-                System.out.println("3 - Direita");
+                System.out.println("5 - Esquerda: Floresta sombria");
+                System.out.println("8 - Direita: Caminho pela margem do rio");
 
                 do{
                     op = scanner.nextInt();
-                }while (op != 5 && op != 3);
+                }while (op != 5 && op != 8);
 
                 labirinto(op, heroi);
                 break;
@@ -449,10 +450,18 @@ public class Jogo {
 
             case 7:
                 System.out.println("\n-------------------------------------------\n");
-                System.out.println("casa 7");
-                System.out.println("\nEscolha uma opção: ");
-                System.out.println("8 - xxxx");
-                System.out.println("9 - xxxx");
+                System.out.println("Esta ponte está muito instável.");
+                System.out.println("OOOPPS!!! Cuidado!!!");
+                System.out.println("SPLASSSHHH!!");
+                System.out.println("\n\nConseguiste chegar até à margem mas perdesde muita energia\n");
+
+                heroi.setVida(heroi.getVida() - 15);
+                heroi.mostrarDetalhes();
+                heroi.usarPocao();
+
+                System.out.println("\nE agora? Seguimos por um atalho até à Gruta das Sombras? \nOu vamos pelo caminho da margem?");
+                System.out.println("8 - Caminho da margem");
+                System.out.println("9 - Atalho para a Gruta das Sombras");
 
                 do{
                     op = scanner.nextInt();
@@ -463,28 +472,61 @@ public class Jogo {
                 break;
             case 8:
                 System.out.println("\n-------------------------------------------\n");
-                System.out.println("Casa 8");
-                //MONTANHA
+                System.out.println("Que caminho tão bonito e calmo!");
+                System.out.println("Oh oh... Falei cedo demais!");
+                System.out.println("Cuidado!!");
+                System.out.println("\n\nBRUXA: Ha ha ha ha. És meu!!!");
+
+                p = (heroi.atacar(Bruxa) == heroi);
+                if (p == true) {
+
+                    heroi.usarPocao();
+
+                    heroi.mostrarDetalhes();
 
 
-                System.out.println("Vai para casa 10");
-
-                labirinto (10,heroi);
-
+                    labirinto(10, heroi);
+                }
+                else reset("Game Over!!!");
 
                 break;
             case 9:
                 System.out.println("\n-------------------------------------------\n");
-                reset("Congratulations!!!");
+                System.out.println("Chegamos finalmente à Gruta das Sombras.");
+                System.out.println("Julga-se que é aqui que está escondida a Pedra das Trevas...");
+                System.out.println("Mas para a recuperarmos temos de enfrentar quem a roubou... E não vai ser pêra doce!");
+
+                heroi.usarPocao();
+
+                System.out.println("\n\nO que é este barulho??\nO que é aquilo??");
+                System.out.println("UM DEMóNIO!!!");
+
+                p = (heroi.atacar(Demonio) == heroi);
+                if (p == true) {
+
+                    heroi.mostrarDetalhes();
+
+                    reset("Conseguimos!!!\n Derrotamos o demónio e recuperamos a Pedra das Trevas!!\n ");
+                }
+                else reset("Game Over!!!");
 
                 break;
             case 10:
                 System.out.println("\n-------------------------------------------\n");
-                System.out.println("Casa 10");
-                //MONTANHA
+                System.out.println("UFF... Que medo! Que embuscada!");
+                System.out.println("Obviamente que o nosso herói conseguiu desenvencilhar-se da Bruxa com relativa facilidade!");
+
+                System.out.println("Mas agora temos de seguir caminho. \nNão sem antes passarmos no vendedor novamente!");
 
 
-                System.out.println("Vai para casa 9");
+                heroi.mostrarDetalhes();
+
+                System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
+                System.out.println("Interessado em algum dos meus itens?\n");
+
+                vendedor1.imprimirInventario();
+
+                vendedor1.vender(heroi);
 
                 labirinto (9,heroi);
 
@@ -493,14 +535,19 @@ public class Jogo {
                 break;
             case 11:
                 System.out.println("\n-------------------------------------------\n");
-                System.out.println("Casa 11");
-                //MONTANHA
+                System.out.println("Decisão sensata! \n Barqueiro simpático e no cais temos um vendedor!");
+                System.out.println("Tudo o que precisamos para seguir para a Gruta das Sombras!\n");
 
+                heroi.mostrarDetalhes();
 
-                System.out.println("Vai para casa 9");
+                System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
+                System.out.println("Interessado em algum dos meus itens?\n");
+
+                vendedor1.imprimirInventario();
+
+                vendedor1.vender(heroi);
 
                 labirinto (9,heroi);
-
                 break;
         }
         return true;
