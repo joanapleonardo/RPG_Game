@@ -37,11 +37,9 @@ public class Cavaleiro extends Heroi {
                     int danoHeroi = this.getForca() + this.getArma().getAtaque();
                     npc.setVida(npc.getVida() - danoHeroi);
                     System.out.println(npc.getNome() +" : "+npc.getVida());
-                    //npc.subtrairVida(danoHeroi);
 
                     // Verifica se o inimigo ainda está vivo
                     if (npc.getVida() <= 0) {
-                        //System.out.println("O herói venceu!");
                         this.subirNivel();
                         this.incrementarVida(10);
                         this.incrementarForca(1);
@@ -53,10 +51,10 @@ public class Cavaleiro extends Heroi {
         }
 
         if (npc.getVida() <= 0 && existeArma == true) {
-            System.out.println("O herói venceu!");
+            System.out.println("O herói venceu!\n");
             return this;
         } else {
-            System.out.println("O herói foi derrotado.");
+            System.out.println("O herói foi derrotado.\n");
             return npc;
         }
     }

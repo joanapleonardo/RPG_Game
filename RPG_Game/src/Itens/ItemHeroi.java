@@ -8,8 +8,6 @@ public abstract class ItemHeroi{
     private ArrayList<TiposHeroi> tiposHeroi;
 
 
-    /** --------------------------- CONSTRUTORES ----------------------------------*/
-
     /**
      * Construtor da classe Heroi
      * @param nome
@@ -28,26 +26,13 @@ public abstract class ItemHeroi{
     public abstract void mostrarDetalhes();
 
 
-    /** --------------------------- GETTERS E SETTERS ----------------------------------*/
-
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public int getPreco() {
         return preco;
-    }
-
-    public void setPreco(int preco) {
-        this.preco = preco;
-    }
-
-    public void setTiposHeroi(ArrayList<TiposHeroi> tiposHeroi) {
-        this.tiposHeroi = tiposHeroi;
     }
 
     public ArrayList<TiposHeroi> getTiposHeroi() {

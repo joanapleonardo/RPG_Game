@@ -14,10 +14,6 @@ public class Arma extends ItemHeroi{
         return ataque;
     }
 
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
-
     @Override
     public void mostrarDetalhes() {
         System.out.println("Nome: " +getNome());

@@ -1,15 +1,10 @@
 package Itens;
 
-import Entidades.Heroi;
-
 import java.util.ArrayList;
 
 public class  PocaoHP extends ItemHeroi {
 
     private int curar;
-
-    /** --------------------------- CONSTRUTORES ----------------------------------*/
-
 
     /**
      * Método construtor da classe PocaoHP
@@ -28,14 +23,9 @@ public class  PocaoHP extends ItemHeroi {
         System.out.println("Preço: " +getPreco());
         System.out.println("Cura: " +getCurar());
     }
-    /** --------------------------- GETTERS E SETTERS ----------------------------------*/
 
     public int getCurar() {
         return curar;
-    }
-
-    public void setCurar(int curar) {
-        this.curar = curar;
     }
 
 }

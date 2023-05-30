@@ -1,6 +1,5 @@
 package Entidades;
 
-import Itens.Arma;
 import Itens.PocaoHP;
 
 import java.util.ArrayList;
@@ -31,11 +30,9 @@ public class Feiticeiro extends Heroi {
                 int danoHeroi = this.getForca() + this.getArma().getAtaque();
                 npc.setVida(npc.getVida() - danoHeroi);
                 System.out.println(npc.getNome() +" : "+ npc.getVida());
-                //npc.subtrairVida(danoHeroi);
                 // Verifica se o herói ainda está vivo
                 // Verifica se o inimigo ainda está vivo
                 if (npc.getVida() <= 0) {
-                    //System.out.println("O herói venceu!");
                     this.subirNivel();
                     this.incrementarVida(10);
                     this.incrementarForca(1);
@@ -51,10 +48,10 @@ public class Feiticeiro extends Heroi {
         }
 
         if (npc.getVida() <= 0 && existeArma == true) {
-            System.out.println("O herói venceu!");
+            System.out.println("O herói venceu!\n");
             return this;
         } else {
-            System.out.println("O herói foi derrotado.");
+            System.out.println("O herói foi derrotado.\n");
             return npc;
         }
     }

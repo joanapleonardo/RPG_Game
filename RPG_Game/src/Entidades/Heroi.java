@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Classe abstrata Heroi, que deriva da classe mãe chamada Entidade
+ * Classe abstrata Heroi, que deriva da super classe classe Entidade
  */
 public abstract class Heroi extends Entidade {
     private int nivel;
@@ -17,7 +17,6 @@ public abstract class Heroi extends Entidade {
 
 
 
-    /** --------------------------- Construtores ----------------------------------*/
 
     /**
      * Método construtor da classe Heroi
@@ -45,12 +44,12 @@ public abstract class Heroi extends Entidade {
      * Método para adicionar uma pocao ao ArrayList de PocaoHP
      * @param pocao
      */
-    public void adicionarPocao(PocaoHP pocao) {  // MÉTODO NÃO PEDIDO NO ENUNCIADO
+    public void adicionarPocao(PocaoHP pocao) {
         this.pocoes.add(pocao);
     }
 
     /**
-     * Método para retirar ouro da conta do Heroi caso ele compre um item
+     * Método para retirar ouro do Heroi caso compre um item
      * @param quantidade
      */
     public void decrementarOuro(int quantidade) {
@@ -58,7 +57,7 @@ public abstract class Heroi extends Entidade {
     }
 
     /**
-     * Metodo que usa pocao para se recuperar
+     * Metodo que usa pocao para recuperar vida
      */
     public void usarPocao() {
 
@@ -95,25 +94,12 @@ public abstract class Heroi extends Entidade {
         }
     }
 
-    /**
-     *  Método que busca a ppocao por nome
-     * @param nomePocao
-     * @return
-     */
-    private PocaoHP buscarPocaoPorNome(String nomePocao) {
-        for (PocaoHP pocao : pocoes) {
-            if (pocao.getNome().equals(nomePocao)) {
-                return pocao;
-            }
-        }
-        return null;
-    }
+
 
     /**
      * Método que incrementa vida ao Heroi
      * @param quantidade
      */
-    // Método para incrementar a vida do herói
     public void incrementarVida(int quantidade) {
         setVida(getVida() + quantidade);
     }
@@ -128,7 +114,7 @@ public abstract class Heroi extends Entidade {
     }
 
     /**
-     * Metodo para incrementar força quando o Herói vencer
+     * Metodo para incrementar força quando o Herói vence
      * @param quantidade
      */
     public void incrementarForca(int quantidade) {
@@ -136,7 +122,7 @@ public abstract class Heroi extends Entidade {
     }
 
     /**
-     * Método que sobe o nível do Heroi
+     * Método que sobe o nível do Heroi em caso de vitória
      */
     public void subirNivel () {
         nivel++;
@@ -152,14 +138,9 @@ public abstract class Heroi extends Entidade {
 
 
 
-    /** --------------------------- GETTERS AND SETTERS  ----------------------------------*/
 
     public int getNivel() {
         return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public int getOuro() {
@@ -181,10 +162,5 @@ public abstract class Heroi extends Entidade {
     public ArrayList<PocaoHP> getPocoes() {
         return pocoes;
     }
-
-    public void setPocoes(ArrayList<PocaoHP> pocoes) {
-        this.pocoes = pocoes;
-    }
-
 
 }

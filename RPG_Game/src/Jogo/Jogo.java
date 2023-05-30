@@ -1,12 +1,8 @@
 package Jogo;
 import Entidades.*;
 import Itens.Arma;
-import Itens.ItemHeroi;
 import Itens.PocaoHP;
 import Itens.TiposHeroi;
-
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +10,10 @@ import java.util.Scanner;
 public class Jogo {
 
 
-    /******************* Instanciar os personagens *************************/
+    /**
+     * Método para instanciar um objeto Cavaleiro
+     * @return
+     */
     public static Cavaleiro criarCavaleiro() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nQual é o nome do Cavaleiro?");
@@ -22,6 +21,10 @@ public class Jogo {
         return new Cavaleiro(nome, 0, 0, 0, 0);
     }
 
+    /**
+     * Método para instanciar um objeto Feiticeiro
+     * @return
+     */
     public static Feiticeiro criarFeiticeiro() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nQual é o nome do Feiticeiro?");
@@ -29,7 +32,10 @@ public class Jogo {
         return new Feiticeiro(nome, 0, 0, 0, 0);
     }
 
-
+    /**
+     * Método para instanciar um objeto Arqueiro
+     * @return
+     */
     public static Arqueiro criarArqueiro() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nQual é o nome do Arqueiro?");
@@ -44,11 +50,10 @@ public class Jogo {
         boolean venceu;
         String resposta = "";
         do {
-            /*********** Selecionar o tipo de herói *******************/
             int heroiEscolhido;
             Heroi heroi = null;
             boolean opcaoValida = false;
-
+//inicio do jogo/introdução
             while (!opcaoValida) {
                 System.out.println("\nBem-vindo ao Reino de Eldoria!");
                 System.out.println("\nAqui, a magia fluía livremente e criaturas míticas vagueavam pela terra. \nO reino estava sob a proteção de um rei sábio e justo, que governava com benevolência e sabedoria. \nNo entanto, o equilíbrio do reino foi ameaçado quando um antigo mal despertou das sombras.");
@@ -184,12 +189,15 @@ public class Jogo {
                 System.out.println("deseja tentar de novo? S/N");
                 resposta = scanner.next();
                 resposta = resposta.toUpperCase();
-                //input de reposta. se resposta for sim corre tudo de novo
             }
 
         }while (resposta.equals("S"));
     }
 
+    /**
+     * Metodo que permite reiniciar o jogo em caso de vitória ou derrota
+     * @param message
+     */
     private static void reset(String message)
     {
         if(message != null) {
@@ -210,15 +218,21 @@ public class Jogo {
         }
     }
 
+    /**
+     * inicio do labirinto
+     * @param op
+     * @param heroi
+     * @return
+     */
     public static boolean labirinto(int op, Heroi heroi){
         Scanner scanner = new Scanner(System.in);
 
         boolean p = false;
         // instanciar inimigos
-        NPC Hades = new NPC("Hades", 140, 30);
+        NPC Hades = new NPC("Hades", 90, 30);
         //npc1.mostrarDetalhes();
 
-        NPC Dragao = new NPC("Dragão Ancião", 100, 20);
+        NPC Dragao = new NPC("Dragão Ancião", 90, 30);
         //npc2.mostrarDetalhes();
 
         NPC Necromante = new NPC("Necromante", 80, 40);
@@ -227,7 +241,7 @@ public class Jogo {
         NPC Bruxa = new NPC("Bruxa Malévola ", 15, 5);
         //npc4.mostrarDetalhes();
 
-        NPC Demonio = new NPC("Demônio das Sombra", 160, 50);
+        NPC Demonio = new NPC("Demônio das Sombra", 100, 50);
         //npc5.mostrarDetalhes();
 
         // instância do arraylist que tem que ser passado como parâmetro na instância da PocaoHP
@@ -295,6 +309,7 @@ public class Jogo {
         vendedor1.adicionarItem(espada);
 
 
+        //Labirinto construido com recursividade, opções para o utilizador e possibilidade de vitória
         switch (op)
         {
             case 0:
@@ -516,7 +531,7 @@ public class Jogo {
                 System.out.println("UFF... Que medo! Que embuscada!");
                 System.out.println("Obviamente que o nosso herói conseguiu desenvencilhar-se da Bruxa com relativa facilidade!");
 
-                System.out.println("Mas agora temos de seguir caminho. \nNão sem antes passarmos no vendedor novamente!");
+                System.out.println("Mas agora temos de seguir caminho. \nNão sem antes passarmos no vendedor novamente!\n");
 
 
                 heroi.mostrarDetalhes();
@@ -555,6 +570,3 @@ public class Jogo {
 
 
     }
-
-
-//! APÓS A CONCLUSÃO FAZER JAVADOC!

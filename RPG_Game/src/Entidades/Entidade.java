@@ -17,7 +17,6 @@ public abstract class Entidade {
      * @param forca
      */
 
-    /** --------------------------- CONSTRUTORES  ----------------------------------*/
     public Entidade(String nome, int vida, int forca) {
         this.nome = nome;
         this.vida = vida;
@@ -29,15 +28,10 @@ public abstract class Entidade {
      */
     public abstract void mostrarDetalhes();
 
-    /** --------------------------- GETTERS AND SETTERS  ----------------------------------*/
 
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getVida() {

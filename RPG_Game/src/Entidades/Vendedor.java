@@ -46,19 +46,6 @@ public class Vendedor {
 
     }
 
-    public ArrayList<ItemHeroi> getInventario() {
-        return inventario;
-    }
-
-    public void setInventario(ArrayList<ItemHeroi> inventario) {
-        this.inventario = inventario;
-    }
-
-    /**
-     * Método vender que recebe como parametros um heroi da classe Heroi e um item da classe ItemHeroi
-     * @param heroi
-     * @param index
-     */
     /**
      * Método vender que recebe como parametros um heroi da classe Heroi e um item da classe ItemHeroi
      * @param heroi
