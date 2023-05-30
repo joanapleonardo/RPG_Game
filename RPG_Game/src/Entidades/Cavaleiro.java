@@ -25,18 +25,18 @@ public class Cavaleiro extends Heroi {
 
         if(existeArma == true) {
 
-            while (this.getVida() >= 0 && npc.getVida() >= 0) {
+            while (this.getVida() > 0 && npc.getVida() > 0) {
                 // O inimigo ataca primeiro (80% da força original)
                 int danoInimigo = (int) (npc.getForca() * 0.8); // sofre apenas 80% do dano porque ele tem armardura
                 this.subtrairVida(danoInimigo); // que é a quantidade passada no parametro da funcao na classe Heroi
-                System.out.println(this.getVida());
+                System.out.println("A tua vida: " + this.getVida());
 
                 // Verifica se o herói ainda está vivo
-                if (this.getVida() >= 0) {
+                if (this.getVida() > 0) {
                     // O herói ataca
                     int danoHeroi = this.getForca() + this.getArma().getAtaque();
                     npc.setVida(npc.getVida() - danoHeroi);
-                    System.out.println(npc.getVida());
+                    System.out.println(npc.getNome() +" : "+npc.getVida());
                     //npc.subtrairVida(danoHeroi);
 
                     // Verifica se o inimigo ainda está vivo
@@ -87,6 +87,8 @@ public class Cavaleiro extends Heroi {
                 System.out.println("- " + pocao.getNome());
             }
         }
-        else System.out.println("Sem poções!");
+        else {
+            System.out.println("Sem poções!");
+        }
     }
 }

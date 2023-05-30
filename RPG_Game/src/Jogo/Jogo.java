@@ -170,7 +170,7 @@ public class Jogo {
             // Iniciar o labirinto
             System.out.println("\nO " + heroi.getClass().getSimpleName() + " " + heroi.getNome() +
                     " vai iniciar esta jornada épica na dificuldade " + (dificuldade == 1 ? "Fácil" : "Difícil") + ". \nDetalhes do herói: " +
-                    "Força: " + heroi.getForca() + ", Vida: " + heroi.getVida() + ", Ouro: " + heroi.getOuro() + ".");
+                    "\nForça: " + heroi.getForca() + "\nVida: " + heroi.getVida() + "\nOuro: " + heroi.getOuro() + ".");
 
 
             venceu = labirinto(0, heroi);
@@ -214,19 +214,19 @@ public class Jogo {
 
         boolean p = false;
         // instanciar inimigos
-        NPC Hades = new NPC("Hades", 100, 10);
+        NPC Hades = new NPC("Hades", 20000, 10000);
         //npc1.mostrarDetalhes();
 
-        NPC Dragao = new NPC("Dragão Ancião", 80, 8);
+        NPC Dragao = new NPC("Dragão Ancião", 60, 20);
         //npc2.mostrarDetalhes();
 
-        NPC Necromante = new NPC("Necromante", 120, 12);
+        NPC Necromante = new NPC("Necromante", 60, 20);
         //npc3.mostrarDetalhes();
 
-        NPC Bruxa = new NPC("Bruxa Malévola ", 150, 15);
+        NPC Bruxa = new NPC("Bruxa Malévola ", 15, 5);
         //npc4.mostrarDetalhes();
 
-        NPC Demonio = new NPC("Demônio das Sombra", 90, 9);
+        NPC Demonio = new NPC("Demônio das Sombra", 90, 30);
         //npc5.mostrarDetalhes();
 
         // instância do arraylist que tem que ser passado como parâmetro na instância da PocaoHP
@@ -260,9 +260,9 @@ public class Jogo {
 
 
 
-        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 5, tiposHeroi, 60);
-        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 10, tiposHeroi, 90);
-        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 15, tiposHeroi, 25);
+        PocaoHP pocaoSOS = new PocaoHP("Poção de Cura SOS", 5, tiposHeroi, 5);
+        PocaoHP pocaoCompleta = new PocaoHP("Poção de Cura Completa", 15, tiposHeroi, 20);
+        PocaoHP pocaoMenor = new PocaoHP("Poção de Cura Menor", 10, tiposHeroi, 10);
 
         Arma lanca = new Arma("Lança", 5, todosTiposHeroi, 20);
         Arma adaga = new Arma("Adaga", 5, todosTiposHeroi, 20);
@@ -297,6 +297,7 @@ public class Jogo {
         switch (op)
         {
             case 0:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nÀs portas de Eldoria e antes de iniciares a tua jornada, tens um vendedor onde podes comrar tudo o que precisas para enfrentar as maiores adversidades.\n");
 
                 //Mostrar itens disponíveis para compra
@@ -304,9 +305,10 @@ public class Jogo {
                 vendedor1.vender(heroi);
 
                 do {
-                    System.out.println("Inicio da jornada tem 2 opções");
+                    System.out.println("\nAgora que estás pronto e equipado para começar esta jornada só temos de escolher um caminho.");
                     System.out.println("1 - Vale dos mortos");
                     System.out.println("2 - Montanha");
+                    System.out.print("->");
 
                     op = scanner.nextInt();
 
@@ -317,6 +319,7 @@ public class Jogo {
             break;
 
             case 1:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nCorajoso! É preciso audácia para enfrentar o Vale dos Mortos.");
                 System.out.println("\nTerá de enfrendar Hades, o deus das trevas. Boa sorte!");
 
@@ -342,6 +345,7 @@ public class Jogo {
                 break;
 
             case 2:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nEspero que estejas preparado para atravessar a Montanha do Dragão.");
                 System.out.println("\nTem cuidado porque Dragões existem mesmo!!");
                 System.out.println("\n OH OH, la vem ele!!!");
@@ -359,14 +363,11 @@ public class Jogo {
                 break;
 
             case 3:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nSempre a avançar!");
                 System.out.println("Vamos entrar na floresta encantada!");
                 System.out.println("Cuidado com os contrabandistas e vendedores de banha da cobra!");
 
-                System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
-                System.out.println("Interessado em algum dos meus itens?\n");
-
-                System.out.println("Detalhes do vendedor: ");
                 heroi.mostrarDetalhes();
 
                 System.out.println("\nVENDEDOR: 'Olá caro amigo viajante!'");
@@ -383,6 +384,7 @@ public class Jogo {
                 break;
 
             case 4:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nUfff!! Que grande batalha contra o Dragão!!");
                 System.out.println("Ainda bem que chegamos a uma aldeia bem pitoresca onde poderemos descansar");
                 System.out.println("Foi adicionado ao teu inventário uma Poção para recuperares a energia.");
@@ -396,12 +398,13 @@ public class Jogo {
 
                 do{
                     op = scanner.nextInt();
-                }while (op != 2 && op != 3);
+                }while (op != 5 && op != 3);
 
                 labirinto(op, heroi);
                 break;
 
             case 5:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nDecisões... Decisões");
                 System.out.println("\nEscolha uma opção: ");
                 System.out.println("6 - Atravessar o rio a nado?");
@@ -415,6 +418,7 @@ public class Jogo {
             break;
 
             case 6:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("\nO rio está perigoso!");
                 System.out.println("Mas há perigos maiores do que a corrente...");
 
@@ -444,6 +448,7 @@ public class Jogo {
                 break;
 
             case 7:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("casa 7");
                 System.out.println("\nEscolha uma opção: ");
                 System.out.println("8 - xxxx");
@@ -457,6 +462,7 @@ public class Jogo {
 
                 break;
             case 8:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("Casa 8");
                 //MONTANHA
 
@@ -468,11 +474,12 @@ public class Jogo {
 
                 break;
             case 9:
-
+                System.out.println("\n-------------------------------------------\n");
                 reset("Congratulations!!!");
 
                 break;
             case 10:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("Casa 10");
                 //MONTANHA
 
@@ -485,6 +492,7 @@ public class Jogo {
 
                 break;
             case 11:
+                System.out.println("\n-------------------------------------------\n");
                 System.out.println("Casa 11");
                 //MONTANHA
 

@@ -33,7 +33,7 @@ public class Vendedor {
      * Método de imprimir inventário (ArrayList que recebe um item da classe ItemHeroi)
      */
     public void imprimirInventario() {
-        System.out.println("Inventário do Vendedor:");
+        System.out.println("Inventário do Vendedor:\n");
         int contador = 1;
         for (ItemHeroi item : inventario) {
             System.out.println("Item " + contador);
@@ -68,14 +68,14 @@ public class Vendedor {
         ArrayList<ItemHeroi> itensComprados = new ArrayList<>();
 
         while (continuarCompra) {
-            System.out.println("Digite o índice do item que deseja comprar ou 0 para seguir em frente:");
+            System.out.println("\nEsscreve o número do item que queres comprar ou 0 para seguir em frente:");
             Scanner scanner = new Scanner(System.in);
             int index = scanner.nextInt();
 
             if (index == 0) {
                 // Opção para seguir em frente sem comprar mais itens
-                System.out.println("Você escolheu seguir em frente sem comprar mais itens.");
-                System.out.println("--------------------");
+                System.out.println("\nEscolheste seguir em frente sem comprar mais itens.");
+                System.out.println("--------------------\n");
                 continuarCompra = false;
             } else if (index >= 1 && index <= inventario.size()) {
                 ItemHeroi item = inventario.get(index - 1);
@@ -102,24 +102,24 @@ public class Vendedor {
                             heroi.decrementarOuro(item.getPreco());
                             itensComprados.add(item);
                             inventario.remove(item);
-                            System.out.println("Compra realizada com sucesso!");
-                            System.out.println("Você comprou o item: " + item.getNome());
+                            System.out.println("\nCompra realizada com sucesso!\n");
+                            System.out.println("\nCompraste o item: " + item.getNome());
                             System.out.println("O valor do item é: " + item.getPreco());
-                            System.out.println("Seu ouro restante: " + heroi.getOuro());
-                            System.out.println("--------------------");
+                            System.out.println("Seu ouro restante: " + heroi.getOuro() + " moedas.");
+                            System.out.println("--------------------\n");
                             imprimirInventario();
                         } else {
-                            System.out.println("O herói não possui ouro suficiente para comprar este item.");
+                            System.out.println("\nNão tens moedas de outro suficientes para essa compra.\n");
                         }
                     } else {
-                        System.out.println("Item do vendedor não encontrado");
+                        System.out.println("\nItem do vendedor não encontrado\n");
                     }
                     heroi.mostrarDetalhes();
                 } else {
-                    System.out.println("Esse item já foi comprado. Escolha outro item.");
+                    System.out.println("\nEsse item já foi comprado. Escolhe outro item.\n");
                 }
             } else {
-                System.out.println("Índice inválido. Por favor, escolha um índice válido.");
+                System.out.println("\nEscolha inválida!\n");
             }
         }
 
